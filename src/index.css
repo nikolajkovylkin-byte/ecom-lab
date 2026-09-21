@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #e23b34;
+  color: #101116;
+}
+
+/* the receipt line — vertical connective motif used across sequence sections */
+.receipt-line {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    #3a3b45 0px,
+    #3a3b45 4px,
+    transparent 4px,
+    transparent 10px
+  );
+  width: 1px;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+*:focus-visible {
+  outline: 2px solid #e23b34;
+  outline-offset: 2px;
+}
+
+/* global decorative background layer — dot grid + soft glow blobs */
+.bg-decor {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background-color: #101116;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 26px 26px;
+}
+
+.bg-decor .glow {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.55;
+}
+
+.bg-decor .glow-red {
+  width: 620px;
+  height: 620px;
+  top: -220px;
+  right: -160px;
+  background: radial-gradient(circle, #e23b34 0%, transparent 70%);
+}
+
+.bg-decor .glow-graphite {
+  width: 700px;
+  height: 700px;
+  bottom: -280px;
+  left: -200px;
+  background: radial-gradient(circle, #3a3b45 0%, transparent 72%);
+  opacity: 0.5;
+}
+
+.bg-decor .glow-red-2 {
+  width: 460px;
+  height: 460px;
+  top: 55%;
+  left: 45%;
+  background: radial-gradient(circle, #e23b34 0%, transparent 70%);
+  opacity: 0.18;
+}
