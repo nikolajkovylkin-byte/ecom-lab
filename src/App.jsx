@@ -18,13 +18,17 @@ import FinalCTA from "./components/FinalCTA.jsx";
 import Footer from "./components/Footer.jsx";
 import ApplicationForm from "./components/ApplicationForm.jsx";
 import AdminReviews from "./components/AdminReviews.jsx";
+import LegalPage from "./components/LegalPage.jsx";
 
 export default function App() {
-  // Простой роутинг без библиотек: /admin/reviews открывает закрытую
-  // страницу модерации отзывов вместо основного сайта.
-  if (typeof window !== "undefined" && window.location.pathname.startsWith("/admin")) {
-    return <AdminReviews />;
-  }
+  // Простой роутинг без библиотек.
+  // /admin/reviews — закрытая страница модерации отзывов.
+  // /privacy и /terms — юридические документы из футера.
+  const path = typeof window !== "undefined" ? window.location.pathname : "/";
+
+  if (path.startsWith("/admin")) return <AdminReviews />;
+  if (path.startsWith("/privacy")) return <LegalPage doc="privacy" />;
+  if (path.startsWith("/terms")) return <LegalPage doc="terms" />;
 
   return (
     <PackageProvider>

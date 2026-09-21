@@ -7,19 +7,26 @@ export default function Footer() {
         <span className="font-display font-bold">Ecom Lab</span>
 
         <nav className="flex flex-wrap gap-x-6 gap-y-2 text-sm text-paper-dim">
-          <a href="[ССЫЛКА]" className="hover:text-paper transition-colors">
-            Instagram
+          <a
+            href="https://wa.me/77088344780"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-paper transition-colors"
+          >
+            WhatsApp +7 708 834 47 80
           </a>
-          <a href="[ССЫЛКА]" className="hover:text-paper transition-colors">
-            WhatsApp
-          </a>
-          <a href="[ССЫЛКА]" className="hover:text-paper transition-colors">
-            Telegram
-          </a>
-          <a href="[ССЫЛКА]" className="hover:text-paper transition-colors">
+
+          <a
+            href="/privacy"
+            className="hover:text-paper transition-colors"
+          >
             Политика конфиденциальности
           </a>
-          <a href="[ССЫЛКА]" className="hover:text-paper transition-colors">
+
+          <a
+            href="/terms"
+            className="hover:text-paper transition-colors"
+          >
             Условия обучения
           </a>
         </nav>
