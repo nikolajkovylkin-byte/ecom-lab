@@ -6,6 +6,7 @@ const links = [
   { href: "#about", label: "О курсе" },
   { href: "#program", label: "Программа" },
   { href: "#practice", label: "Практика" },
+  { href: "#how-to-enroll", label: "Как записаться" },
   { href: "#packages", label: "Пакеты" },
   { href: "#reviews", label: "Отзывы" },
 ];
@@ -45,7 +46,7 @@ export default function Header() {
           </span>
         </div>
 
-        <nav className="hidden lg:flex items-center gap-8 font-body text-sm text-paper-dim">
+        <nav className="hidden lg:flex items-center gap-6 xl:gap-8 font-body text-sm text-paper-dim">
           {links.map((l) => (
             <button
               key={l.href}

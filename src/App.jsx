@@ -14,6 +14,7 @@ import Testimonials from "./components/Testimonials.jsx";
 import Packages from "./components/Packages.jsx";
 import PackageQuiz from "./components/PackageQuiz.jsx";
 import FAQ from "./components/FAQ.jsx";
+import HowToEnroll from "./components/HowToEnroll.jsx";
 import FinalCTA from "./components/FinalCTA.jsx";
 import Footer from "./components/Footer.jsx";
 import ApplicationForm from "./components/ApplicationForm.jsx";
@@ -50,6 +51,7 @@ export default function App() {
         <Practice />
         <Author />
         <Testimonials />
+        <HowToEnroll />
         <Packages />
         <PackageQuiz />
         <FAQ />
