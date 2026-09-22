@@ -12,7 +12,8 @@ const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT || "";
 const FALLBACK_ENDPOINT = "/api/submit-application";
 
 export default function ApplicationForm() {
-  const { formOpen, closeForm, selected, selectedId, selectPackage } = usePackage();
+  const { formOpen, closeForm, selected, selectedId, selectPackage, customRequest } =
+    usePackage();
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState("");
@@ -37,8 +38,8 @@ export default function ApplicationForm() {
       name,
       phone,
       whatsapp,
-      package: selected?.name || "",
-      price: selected?.price || "",
+      package: customRequest?.name || selected?.name || "",
+      price: customRequest?.price || selected?.price || "",
     };
 
     const endpoint = FORMSPREE_ENDPOINT || FALLBACK_ENDPOINT;
@@ -80,7 +81,11 @@ export default function ApplicationForm() {
           >
             <div className="flex items-center justify-between">
               <h3 className="font-display font-bold text-xl">
-                {submitted ? "Заявка отправлена" : "Оставить заявку на обучение"}
+                {submitted
+                  ? "Заявка отправлена"
+                  : customRequest
+                  ? `Заявка: ${customRequest.name}`
+                  : "Оставить заявку на обучение"}
               </h3>
               <button onClick={close} className="text-paper-faint hover:text-paper">
                 <X size={20} />
@@ -91,8 +96,9 @@ export default function ApplicationForm() {
               <div className="mt-8 flex flex-col items-center text-center py-4">
                 <CheckCircle2 size={38} className="text-signal" />
                 <p className="mt-4 text-sm text-paper-dim max-w-xs">
-                  Спасибо! Мы свяжемся с тобой в ближайшее время, чтобы подтвердить
-                  пакет {selected?.name || ""} и рассказать о следующих шагах.
+                  Спасибо! Мы свяжемся с тобой в ближайшее время, чтобы подтвердить{" "}
+                  {customRequest ? customRequest.name.toLowerCase() : `пакет ${selected?.name || ""}`} и
+                  рассказать о следующих шагах.
                 </p>
                 <button
                   onClick={close}
@@ -103,29 +109,38 @@ export default function ApplicationForm() {
               </div>
             ) : (
               <form onSubmit={submit} className="mt-6 space-y-4">
-                <div>
-                  <label className="text-xs text-paper-faint">Выбранный пакет</label>
-                  <select
-                    value={selectedId || ""}
-                    onChange={(e) => selectPackage(e.target.value, false)}
-                    className="mt-1.5 w-full rounded-lg bg-ink-700 border border-ink-600 px-3.5 py-2.5 text-sm focus:border-signal outline-none"
-                  >
-                    <option value="" disabled>
-                      Выбери пакет
-                    </option>
-                    {packages.map((p) => (
-                      <option key={p.id} value={p.id}>
-                        {p.name} — {p.price}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {selected && (
+                {customRequest ? (
                   <div className="flex items-center justify-between rounded-lg bg-ink-700/60 border border-ink-600 px-3.5 py-2.5 text-sm">
-                    <span className="text-paper-dim">Стоимость</span>
-                    <span className="font-mono font-semibold">{selected.price}</span>
+                    <span className="text-paper-dim">{customRequest.name}</span>
+                    <span className="font-mono font-semibold">{customRequest.price}</span>
                   </div>
+                ) : (
+                  <>
+                    <div>
+                      <label className="text-xs text-paper-faint">Выбранный пакет</label>
+                      <select
+                        value={selectedId || ""}
+                        onChange={(e) => selectPackage(e.target.value, false)}
+                        className="mt-1.5 w-full rounded-lg bg-ink-700 border border-ink-600 px-3.5 py-2.5 text-sm focus:border-signal outline-none"
+                      >
+                        <option value="" disabled>
+                          Выбери пакет
+                        </option>
+                        {packages.map((p) => (
+                          <option key={p.id} value={p.id}>
+                            {p.name} — {p.price}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    {selected && (
+                      <div className="flex items-center justify-between rounded-lg bg-ink-700/60 border border-ink-600 px-3.5 py-2.5 text-sm">
+                        <span className="text-paper-dim">Стоимость</span>
+                        <span className="font-mono font-semibold">{selected.price}</span>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div>
@@ -166,7 +181,7 @@ export default function ApplicationForm() {
 
                 <button
                   type="submit"
-                  disabled={!selectedId || sending}
+                  disabled={(!selectedId && !customRequest) || sending}
                   className="w-full rounded-full bg-signal py-3.5 text-sm font-semibold hover:bg-signal-dim transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
                 >
                   {sending ? "Отправляем…" : "Отправить заявку"}

@@ -109,7 +109,14 @@ export default function PackageDetailModal({ pkg, onClose, onSelect }) {
         <div className="px-6 py-5 border-t border-ink-600 shrink-0 flex items-center justify-between gap-4 bg-ink-800">
           <div>
             <p className="text-[11px] text-paper-faint">Стоимость</p>
-            <p className="font-mono text-xl font-bold">{pkg.price}</p>
+            <div className="flex items-baseline gap-2 flex-wrap">
+              {pkg.originalPrice && (
+                <span className="font-mono text-sm text-paper-faint line-through">
+                  {pkg.originalPrice}
+                </span>
+              )}
+              <p className="font-mono text-xl font-bold">{pkg.price}</p>
+            </div>
           </div>
           <button
             onClick={onSelect}

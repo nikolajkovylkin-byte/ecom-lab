@@ -2,6 +2,7 @@ import React from "react";
 import { PackageProvider } from "./context/PackageContext.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
+import Consultation from "./components/Consultation.jsx";
 import SellerFlow from "./components/SellerFlow.jsx";
 import ForWhom from "./components/ForWhom.jsx";
 import SkillsDashboard from "./components/SkillsDashboard.jsx";
@@ -42,6 +43,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <Consultation />
         <SellerFlow />
         <ForWhom />
         <SkillsDashboard />

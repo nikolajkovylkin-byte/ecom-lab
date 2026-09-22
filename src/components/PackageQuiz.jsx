@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Store, RotateCcw, Rocket, Globe, Sparkles } from "lucide-react";
+import { Store, RotateCcw, Rocket, TrendingUp, Sparkles } from "lucide-react";
 import { quizQuestions, resolvePackage, packages } from "../data.js";
 import { usePackage } from "../context/PackageContext.jsx";
 
@@ -8,7 +8,7 @@ const questionIcons = {
   hasShop: Store,
   needsReturns: RotateCcw,
   needsFullLaunch: Rocket,
-  needsMarketplaces: Globe,
+  needsPriority: TrendingUp,
 };
 
 export default function PackageQuiz() {
@@ -129,9 +129,14 @@ export default function PackageQuiz() {
                   <p className="text-sm text-paper-dim mt-2 max-w-sm">
                     {suggestion.tagline}
                   </p>
-                  <p className="font-mono text-xl font-semibold mt-4">
-                    {suggestion.price}
-                  </p>
+                  <div className="flex items-baseline gap-2 flex-wrap mt-4">
+                    {suggestion.originalPrice && (
+                      <span className="font-mono text-sm text-paper-faint line-through">
+                        {suggestion.originalPrice}
+                      </span>
+                    )}
+                    <p className="font-mono text-xl font-semibold">{suggestion.price}</p>
+                  </div>
                   <button
                     onClick={() => selectPackage(suggestion.id)}
                     className="mt-6 w-full rounded-full bg-signal py-3 text-sm font-semibold hover:bg-signal-dim transition-colors"

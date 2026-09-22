@@ -72,7 +72,15 @@ export default function Packages() {
 
                 <h3 className="font-display font-bold text-xl mt-4">{p.name}</h3>
                 <p className="text-sm text-paper-dim mt-2 min-h-[52px]">{p.tagline}</p>
-                <p className="font-mono text-xl font-semibold mt-3">{p.price}</p>
+
+                <div className="mt-3 flex items-baseline gap-2 flex-wrap">
+                  {p.originalPrice && (
+                    <span className="font-mono text-sm text-paper-faint line-through">
+                      {p.originalPrice}
+                    </span>
+                  )}
+                  <span className="font-mono text-xl font-semibold">{p.price}</span>
+                </div>
 
                 <ul className="mt-5 space-y-2.5 flex-1">
                   {p.features.slice(0, 4).map((f) => (
